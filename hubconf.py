@@ -28,6 +28,7 @@ Users can force a fresh reload by calling hub.load(..., force_reload=True).
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+import torch.utils.model_zoo as model_zoo
 
 # Optional list of dependencies required by the package
 dependencies = ['torch']
@@ -52,7 +53,7 @@ class Net(nn.Module):
         return F.log_softmax(x, dim=1)
 
 
-def cnn(pretrained=False, *args, **kwargs):
+def cnn(pretrained=True, *args, **kwargs):
     """
     CNN model for MNIST
     pretrained (bool): a recommended kwargs for all entrypoints
@@ -60,6 +61,8 @@ def cnn(pretrained=False, *args, **kwargs):
     """
     model = Net()
     checkpoint = 'https://github.com/johnhany/torchhub/blob/master/models/cnn.pth'
+    # checkpoint = 'models/cnn.pth'
     if pretrained:
-        model.load_state_dict(torch.load(checkpoint))
+        model.load_state_dict(model_zoo.load_url(checkpoint))
+        # model.load_state_dict(torch.load(checkpoint))
     return model

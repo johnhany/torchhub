@@ -4,6 +4,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
+import torch.hub as hub
 from torchvision import datasets, transforms
 
 
@@ -51,7 +52,7 @@ def main():
         batch_size=args.test_batch_size, shuffle=True, **kwargs)
 
 
-    model = torch.hub.load("johnhany/torchhub:master", "cnn").to(device)
+    model = hub.load("johnhany/torchhub:master", "cnn", force_reload=True).to(device)
 
     test(args, model, device, test_loader)
 

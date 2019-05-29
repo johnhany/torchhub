@@ -25,10 +25,11 @@ We used the cache by default if it exists in hub_dir.
 Users can force a fresh reload by calling hub.load(..., force_reload=True).
 '''
 
+import os
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import torch.utils.model_zoo as model_zoo
 
 # Optional list of dependencies required by the package
 dependencies = ['torch']
@@ -62,5 +63,5 @@ def cnn(pretrained=True, *args, **kwargs):
     model = Net()
     checkpoint = 'models/cnn.pth'
     if pretrained:
-        model.load_state_dict(torch.load(checkpoint))
+        model.load_state_dict(torch.load(os.path.join(os.path.dirname(os.path.abspath(__file__)), checkpoint)))
     return model

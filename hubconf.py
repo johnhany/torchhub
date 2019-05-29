@@ -63,5 +63,5 @@ def cnn(pretrained=True, *args, **kwargs):
     model = Net()
     checkpoint = 'models/cnn.pth'
     if pretrained:
-        model.load_state_dict(torch.load(os.path.join(os.getcwd(), checkpoint)))
+        model.load_state_dict(torch.load(os.path.join(os.path.dirname(os.path.abspath(__file__)), checkpoint)))
     return model

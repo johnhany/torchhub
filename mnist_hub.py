@@ -52,7 +52,7 @@ def main():
         batch_size=args.test_batch_size, shuffle=True, **kwargs)
 
 
-    model = hub.load("johnhany/torchhub:abspath", "cnn", force_reload=False, pretrained=True).to(device)
+    model = hub.load("johnhany/torchhub:master", "cnn", force_reload=True, pretrained=True).to(device)
 
     test(args, model, device, test_loader)
 
